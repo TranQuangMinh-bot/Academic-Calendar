@@ -16,8 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
+    path("calendar/", include("calendar_app.urls")),
+    # Frontend routes
+    path("auth/login", TemplateView.as_view(template_name="index.html")),
+    path("profile", TemplateView.as_view(template_name="index.html")),
+    path("", RedirectView.as_view(url="/auth/login")),
 ]
